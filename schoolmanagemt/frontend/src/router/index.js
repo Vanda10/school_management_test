@@ -19,7 +19,7 @@ const routes = [
   { path: '/dashboard', component: dashboard }, // Add a route for the dashboard
   { path: '/all-teacher', component: AllTeacher },
   { path: '/add-teacher', component: AddTeacher },
-  { path: '/teacher-detail', component: TeacherDetail },
+  { path: '/teacher-detail/:id', name: 'teacher_detail', component: TeacherDetail },
   { path: '/all-student', component: AllStudent },
   { path: '/add-student', component: AddStudent },
   { path: '/all-class', component: AllClass },

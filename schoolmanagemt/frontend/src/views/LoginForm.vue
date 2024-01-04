@@ -2,14 +2,14 @@
     <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <img class="mx-auto h-20 w-auto" alt="Your Company" src="../assets/rupp_logo.png">
-        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 dark:text-white">Sign in to your account</h2>
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
       </div>
 
       <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form class="space-y-6" action="#" method="POST">
 
           <div>
-            <label for="role" class="block text-sm font-medium leading-6 text-gray-900 dark:text-white">Role</label>
+            <label for="role" class="block text-sm font-medium leading-6 text-gray-900">Role</label>
             <div class="mt-2">
               <select id="role" name="role" v-model="getRole" v-on:change="process()" required class="select select-bordered block w-full">
                 <option value="admin">Admin</option>
@@ -43,7 +43,7 @@
           </div>
 
           <div>
-            <button type="submit" class="btn btn-error w-full text-white">Sign in</button>
+            <button class="btn bg-[#B22222] w-full text-white hover:bg-red-900 font-bold">Sign in</button>
           </div>          
 
         </form>

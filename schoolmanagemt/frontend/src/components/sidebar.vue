@@ -46,12 +46,6 @@
             Add teacher
           </router-link>
         </h1>
-        <h1 id="teacher-details" class="p-2 hover:bg-sky-900 rounded-md mt-1">
-          <router-link to="/teacher-detail">
-            <i class="bi bi-caret-right-fill"></i>
-            Teacher details
-          </router-link>
-        </h1>
       </div>
 
       <div
