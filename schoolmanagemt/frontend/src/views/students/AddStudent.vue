@@ -1,89 +1,120 @@
 <template>
-    <div class="main-content ml-[300px] p-8">
-        <!-- first row -->
-      <div class="text-4xl font-bold mt-20 ml-20">
-        <h1>Add Student</h1>
-      </div>
-
-      <div class="mt-5 flex ml-20 mr-20">
-        <div class="mb-3 grow h-14">
-          <div class="form-text text-gray-900" id="first_name">First Name</div>
-          <div class="input-group">
-            <input type="text" class="form-control" id="first_name" aria-describedby="basic-addon4">
-          </div>
-        </div> 
-      
-        <div class="mb-3 grow h-25 ml-3">
-          <div class="form-text text-gray-900" id="last_name">Last Name</div>
-          <div class="input-group">
-            <input type="text" class="form-control" id="last_name" aria-describedby="basic-addon4">
-          </div>
-        </div> 
-      </div>
-    
-          
-      <div class="flex ml-20 mr-20">
-        <div class="mb-3 grow h-14">
-          <div class="form-text text-gray-900" id="email">Email Address</div>
-          <div class="input-group">
-            <input type="text" class="form-control" id="email" aria-describedby="basic-addon4">
-          </div>
-        </div> 
-      
-        <div class="ml-3 grow-0">
-          <div class="input-group">
-            <div class="form-text text-gray-900" id="gender">Gender</div>
-            <div class="input-group">
-              <select class="form-select" id="gender" aria-label="Example select with button addon">
-                <option value="-">-</option>
-                <option value="Female">Female</option>
-                <option value="Male">Male</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="ml-3 grow-0">
-            <div class="form-text text-gray-900" id="class">Class</div>
-            <div class="input-group">
-              <input type="text" class="form-control" id="class" aria-describedby="basic-addon4">
-            </div>
-          </div> 
-      </div>
-
-      <div class="flex ml-20 mr-20">
-        <div class="mb-3 grow h-14">
-          <div class="form-text text-gray-900" id="password">Password</div>
-          <div class="input-group">
-            <input type="text" class="form-control" id="password" aria-describedby="basic-addon4">
-          </div>
-        </div> 
-      
-        <div class="mb-3 grow h-25 ml-3">
-          <div class="form-text text-gray-900" id="phone_number">Phone Number</div>
-          <div class="input-group">
-            <input type="text" class="form-control" id="phone_number" aria-describedby="basic-addon4">
-          </div>
-        </div> 
-      </div>
-
-      <div class="flex ml-[80px] mr-0">
-        <!-- Button trigger modal -->
-        <div class="mt-10">
-          <button type="button" class="btn text-white bg-[#183D5C] hover:bg-sky-700 px-5 py-2.5 me-2 mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
-            <i class="bi bi-pencil-square"></i> Add Student
-          </button>
-        </div>
-        
-      </div>
-      
+  <div class="main-content ml-[300px] p-8">
+    <div class="text-4xl font-bold mt-4 ml-10">
+      <h1>Create Student</h1>
     </div>
+
+    <div class="flex mt-5 ml-5">
+      <div class="grid grid-cols-2 gap-6 text-gray-400 font-bold w-full">
+        <div class="mb-3">
+          <label class="block text-[#183D5C] mb-1">First Name</label>
+          <input v-model="newStudent.first_name" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label class="block text-[#183D5C] mb-1">Last Name</label>
+          <input v-model="newStudent.last_name" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label class="block text-[#183D5C] mb-1">Gender</label>
+          <input v-model="newStudent.gender" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label class="block text-[#183D5C] mb-1">Date of Birth</label>
+          <input v-model="newStudent.dob" type="date" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label class="block text-[#183D5C] mb-1">Phone Number</label>
+          <input v-model="newStudent.phone_number" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label class="block text-[#183D5C] mb-1">Email</label>
+          <input v-model="newStudent.email" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label class="block text-[#183D5C] mb-1">Password</label>
+          <input v-model="newStudent.password" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label class="block text-[#183D5C] mb-1">Department ID</label>
+          <input v-model="newStudent.department_id" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label class="block text-[#183D5C] mb-1">Class ID</label>
+          <input v-model="newStudent.class_id" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label class="block text-[#183D5C] mb-1">Year</label>
+          <input v-model="newStudent.year" class="form-control" />
+        </div>
+        <button @click="addStudent" class="btn w-[150px] text-white bg-sky-600 hover:bg-sky-700 px-4 py-2.5 mt-2">
+          Add Student
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import axios from 'axios';
 
+const newStudent = ref({
+  first_name: '',
+  last_name: '',
+  gender: '',
+  dob: '',
+  phone_number: '',
+  email: '',
+  password: '',
+  department_id: '',
+  class_id: '',
+  year: '',
+});
+
+const addStudent = async () => {
+  try {
+    // Check if all required fields are present
+    const requiredFields = ['first_name', 'last_name', 'gender', 'dob', 'phone_number', 'email', 'password', 'department_id', 'class_id', 'year'];
+    
+    for (const field of requiredFields) {
+      if (!newStudent.value[field]) {
+        alert(`Validation error: ${field} is required.`);
+        console.error(`Validation error: ${field} is required.`);
+        return; // Stop further processing if a required field is missing
+      }
+    }
+
+    await axios.post('http://127.0.0.1:8000/students/', newStudent.value);
+    // Assuming the API response contains student data
+    alert('Student added successfully');
+    // Clear the input fields
+    newStudent.value = {
+      first_name: '',
+      last_name: '',
+      gender: '',
+      dob: '',
+      phone_number: '',
+      email: '',
+      password: '',
+      department_id: '',
+      class_id: '',
+      year: '',
+    };
+  } catch (error) {
+    if (error.response && error.response.status === 422) {
+      // Validation error
+      alert('Validation error. Please check your input.');
+      console.error('Validation error:', error.response.data.detail);
+
+      // Log individual validation errors
+      error.response.data.detail.forEach((validationError, index) => {
+        console.error(`Validation error ${index + 1}:`, validationError);
+      });
+    } else {
+      // Other error
+      console.error('Error adding student:', error);
+      // You can handle other types of errors here
+    }
+  }
+};
 </script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -51,17 +51,6 @@
         </tr>
       </tbody>
     </table>
-
-    <!-- Modal for Delete Confirmation -->
-    <div v-show="isDeleteModalOpen" class="modal-overlay" @click="cancelDelete">
-      <div class="modal" @click.stop>
-        <p>Are you sure you want to delete this teacher?</p>
-        <div>
-          <button @click="cancelDelete" class="">No</button>
-          <button @click="confirmDelete" class="">Yes</button>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
