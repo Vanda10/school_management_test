@@ -22,8 +22,7 @@
           <div>
             <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
             <div class="mt-2">
-              <!-- <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"> -->
-              <input id="email" name="email" type="email" autocomplete="email" required class="input input-bordered w-full">
+              <input v-model="email" id="email" name="email" type="email" autocomplete="email" required class="input input-bordered w-full">
             </div>
           </div>
 
@@ -37,7 +36,7 @@
             </div>
 
             <div class="mt-2">
-              <input id="password" name="password" type="password" autocomplete="current-password" required class="input input-bordered w-full">
+              <input v-model="password" id="password" name="password" type="password" autocomplete="current-password" required class="input input-bordered w-full">
             </div>
 
           </div>
@@ -54,32 +53,35 @@
 
 
 import { createClient } from '@supabase/supabase-js'
+const email = ref('');
+const password = ref('');
 
 // Create a single supabase client for interacting with your database
 const supabase = createClient('https://mkslcxldoihuzcxijabw.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rc2xjeGxkb2lodXpjeGlqYWJ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQzNjE1MTUsImV4cCI6MjAxOTkzNzUxNX0.40TikJDPUS8rgKYv4-YAMG1kvkpv7AzX4AynpRd3d08')
 
 async function signInWithEmail() {
   const { data, error } = await supabase.auth.signInWithPassword({
-    email: 'vandabest123@gmail.com',
-    password: '1234567890'
+    email: email.value,
+    password: password.value
   })
   console.log(data)
 }
+
 
 import { ref, onMounted, watch } from 'vue'
 const getRole = ref('admin')
 
 const process = () => {
   console.log('Role changed:', getRole.value)
-}
+  }
 
-// Log the initial value on component mount
-onMounted(() => {
-  console.log(`Initial role value: ${getRole.value}`)
-})
+  // Log the initial value on component mount
+  onMounted(() => {
+    console.log(`Initial role value: ${getRole.value}`)
+  })
 
-defineProps({
-    
-})
+  defineProps({
+      
+  })
 
-</script>
+  </script>
