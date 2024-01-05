@@ -35,13 +35,13 @@
       v-if="teacher"
       class="text-left text-sm mt-2 w-4/5 mx-auto text-gray-100 font-bold">
       <h1 id="all-teachers" class="p-2 hover:bg-[#4f1d1d] rounded-md mt-1">
-        <router-link to="/all-teacher">
+        <router-link to="/all-teacher" replace>
           <i class="bi bi-caret-right-fill"></i>
           All teachers
         </router-link>
       </h1>
       <h1 id="add-teacher" class="p-2 hover:bg-[#4f1d1d] rounded-md mt-1">
-        <router-link to="/add-teacher">
+        <router-link to="/add-teacher" replace>
           <i class="bi bi-caret-right-fill"></i>
           Add teacher
         </router-link>
@@ -138,8 +138,7 @@
         </router-link>
       </h1>
     </div>
-    <div
-      class="p-2.5 mt-3 flex items-center rounded-md px-4 hover:bg-[#4f1d1d] text-gray-100">
+    <div class="p-2.5 mt-3 flex items-center rounded-md px-4 hover:bg-[#4f1d1d] text-gray-100" @click="onLogout">
       <i class="bi bi-box-arrow-in-right"></i>
       <span class="text-[15px] ml-4 text-gray-100 font-bold">Logout</span>
     </div>
@@ -164,6 +163,17 @@ if (category === 'teacher') {
 } else if (category === 'courses') {
   courses.value = !courses.value;
 }
+}
+import { createClient } from '@supabase/supabase-js'
+
+// Create a single supabase client for interacting with your database
+const supabase = createClient('https://mkslcxldoihuzcxijabw.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rc2xjeGxkb2lodXpjeGlqYWJ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQzNjE1MTUsImV4cCI6MjAxOTkzNzUxNX0.40TikJDPUS8rgKYv4-YAMG1kvkpv7AzX4AynpRd3d08')
+
+async function onLogout() {
+  const { error } = await supabase.auth.signOut()
+  if (error) {
+    return
+  }
 }
 </script>
 

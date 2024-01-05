@@ -43,14 +43,29 @@
           </div>
 
           <div>
-            <button class="btn bg-[#B22222] w-full text-white hover:bg-red-900 font-bold">Sign in</button>
+            <button type="button" class="btn bg-[#B22222] w-full text-white hover:bg-red-900 font-bold" @click="signInWithEmail">Sign in</button>
           </div>          
 
         </form>
       </div>
     </div>
 </template>
-<script setup>
+<script setup> 
+
+
+import { createClient } from '@supabase/supabase-js'
+
+// Create a single supabase client for interacting with your database
+const supabase = createClient('https://mkslcxldoihuzcxijabw.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1rc2xjeGxkb2lodXpjeGlqYWJ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQzNjE1MTUsImV4cCI6MjAxOTkzNzUxNX0.40TikJDPUS8rgKYv4-YAMG1kvkpv7AzX4AynpRd3d08')
+
+async function signInWithEmail() {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email: 'vandabest123@gmail.com',
+    password: '1234567890'
+  })
+  console.log(data)
+}
+
 import { ref, onMounted, watch } from 'vue'
 const getRole = ref('admin')
 

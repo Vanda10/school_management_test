@@ -13,11 +13,17 @@ import ManageClass from '../views/class/ManageClass.vue';
 import AddCourse from '../views/course/AddCourse.vue';
 import AllCourse from '../views/course/AllCourse.vue';
 import AssignCourse from '../views/course/AssignCourse.vue';
+import Login from "../views/LoginForm.vue";
+import AdminPage from"../views/AdminPage.vue";
 
 const routes = [
-  { path: '/', redirect: '/dashboard' }, // Redirect root path to /dashboard or another default path
-  { path: '/dashboard', component: dashboard }, // Add a route for the dashboard
-  { path: '/all-teacher', component: AllTeacher },
+  { path: '/', 
+    component: AdminPage,
+     children: [
+      { path: '/dashboard', component: dashboard }, // Add a route for the dashboard
+      { path: '/all-teacher', component: AllTeacher }, // Make the dashboard route a child of '/'
+    ]
+  }, // Redirect root path to /dashboard or another default path
   { path: '/add-teacher', component: AddTeacher },
   { path: '/teacher-detail/:id', name: 'teacher_detail', component: TeacherDetail },
   { path: '/all-student', component: AllStudent },
@@ -28,6 +34,7 @@ const routes = [
   { path: '/add-course', component: AddCourse },
   { path: '/all-course', component: AllCourse },
   { path: '/assign-course', component: AssignCourse },
+  { path: '/login', component: Login}
 ];
 
 const router = createRouter({
